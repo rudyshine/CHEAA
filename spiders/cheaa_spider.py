@@ -27,7 +27,10 @@ class cheaaSpider(CrawlSpider):
         next_page=sel.xpath('//*[@id="ListPage"]/ul/li[9]/a/@href').extract()[0]
         if next_page:
             next_link=next_page
-            yield scrapy.Request(url=next_link, callback=self.parse)
+            yield scrapy.Request(url=next_link, callback=self.parse_ccontent)
+
+
+
 
     ##解析详情页面
     def parse_ccontent(self,response):
@@ -56,9 +59,14 @@ class cheaaSpider(CrawlSpider):
             item['ProgramStarttime']=ProgramStarttime
             yield item
 
-            # next_content_page=url.xpath('//*[@id="show-all-cont"]/span/@href').extract()[0]
-            # if next_content_page:
-            #     next_content_link=next_content_page
-            #     print("next_content_link:",next_content_link)
-            #     yield scrapy.Request(url=next_content_link, callback=self.parse_ccontent)
+            try:
+                next_content_page=url.xpath('//div[@class="article-page"]/table/tr/td[7]/a/@href').extract()[0]
+                print('111111111111111')
+                print(next_content_page)
+                if next_content_page:
+                    next_content_link=next_content_page
+                    print("next_content_link:",next_content_link)
+                    yield scrapy.Request(url=next_content_link, callback=self.parse)
+            except IndexError:
+                pass
 
