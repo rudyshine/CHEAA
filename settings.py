@@ -95,4 +95,4 @@ MONGO_PORT = 27017  # 端口号
 MONGO_DB = "CHEAA"  # 库名
 MONGO_COLL = "Cheaa_Info_Items"  # 文档(相当于关系型数据库的表名)
 
-LOG_FILE='cheaa_LOG.txt'
+# LOG_FILE='cheaa_LOG.txt'
