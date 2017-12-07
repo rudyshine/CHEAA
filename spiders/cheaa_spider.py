@@ -4,14 +4,14 @@ from scrapy.spiders import CrawlSpider
 from cheaa.items import CheaaItem
 import scrapy
 import time
+import requests
 
 class cheaaSpider(CrawlSpider):
     name = "cheaa_spider"
     allowed_domains = ["cheaa.com"]
     start_urls = [
-        'http://news.cheaa.com/renwu_18.shtml',
-        # 'http://news.cheaa.com/hangye.shtml'
-        # 'http://news.cheaa.com/2007/1016/100445.shtml'
+        'http://news.cheaa.com/renwu.shtml',
+        'http://news.cheaa.com/hangye.shtml'
     ]
 
     def parse(self, response):
@@ -59,14 +59,11 @@ class cheaaSpider(CrawlSpider):
             item['ProgramStarttime']=ProgramStarttime
             yield item
 
-            try:
-                next_content_page=url.xpath('//div[@class="article-page"]/table/tr/td[7]/a/@href').extract()[0]
-                print('111111111111111')
-                print(next_content_page)
-                if next_content_page:
-                    next_content_link=next_content_page
-                    print("next_content_link:",next_content_link)
-                    yield scrapy.Request(url=next_content_link, callback=self.parse)
-            except IndexError:
-                pass
+            for i in range(2,10):
+                next_content_page=response.url.replace('.shtml','')
+                next_content_link=next_content_page+'_'+str(i)+'.shtml'
+                r=requests.get(next_content_link)
+                if r.status_code==404:
+                    break
+                yield scrapy.Request(url=next_content_link, callback=self.parse_ccontent,meta={'start_url': next_content_link})
 

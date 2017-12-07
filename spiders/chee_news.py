@@ -2,6 +2,7 @@
 
 from scrapy.spiders import CrawlSpider
 from cheaa.items import CheaaItem
+import requests
 import scrapy
 import time
 import re
@@ -27,13 +28,21 @@ class cheaaSpider(CrawlSpider):
             # item['startUrl']= response.meta['start_url']  ##meta方法获取传过来的值
             yield item
 
-            try:
-                next_content_page=next_content_url.xpath('//div[@class="article-page"]/table/tr/td[7]/a/@href').extract()[0]
-                print('111111111111111')
-                print(next_content_page)
-                if next_content_page:
-                    next_content_link=next_content_page
-                    print("next_content_link:",next_content_link)
-                    yield scrapy.Request(url=next_content_link, callback=self.parse)
-            except IndexError:
-                pass
+
+            # try:
+            #     next_content_page=next_content_url.xpath('//div[@class="article-page"]/table/tr/td[7]/a/@href').extract()[0]
+            #     print('111111111111111')
+            #     print(next_content_page)
+            #     if next_content_page:
+            #         next_content_link=next_content_page
+            #         print("next_content_link:",next_content_link)
+            #         yield scrapy.Request(url=next_content_link, callback=self.parse)
+            # except IndexError:
+
+            for i in range(2,6):
+                next_content_page=response.url.replace('.shtml','')
+                next_content_link=next_content_page+'_'+str(i)+'.shtml'
+                r=requests.get(next_content_link)
+                if r.status_code==404:
+                    break
+                yield scrapy.Request(url=next_content_link, callback=self.parse)
