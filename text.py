@@ -1,5 +1,5 @@
 import requests
 
-url='http://news.cheaa.com/2008/0221/117484.shtml'
+url='http://news.cheaa.com/hangye_2.shtml'
 r=requests.get(url)
 print(r.text)

@@ -21,7 +21,7 @@ class CheaaPipeline(object):
     def process_item(self, item, spider):
         insert_item = dict(item)  # 把item转化成字典形式
         # 插入之前查询text是否存在，不存在的时候才插入。
-        self.coll.update({"Time": insert_item['Time']}, {
+        self.coll.update({"LinkUrl": insert_item['LinkUrl']}, {
                          '$setOnInsert': insert_item}, True)
         # self.coll.insert(insert_item)  # 向数据库插入一条记录
         return item  # 会在控制台输出原item数据，可以选择不写
