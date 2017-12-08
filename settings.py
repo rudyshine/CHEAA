@@ -89,8 +89,8 @@ AUTOTHROTTLE_ENABLED = True
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-# MONGO_HOST = "172.28.171.13"  # 主机IP
-MONGO_HOST = "172.28.161.186"  # 本机
+MONGO_HOST = "172.28.171.13"  # 主机IP
+# MONGO_HOST = "172.28.161.186"  # 本机
 MONGO_PORT = 27017  # 端口号
 MONGO_DB = "CHEAA"  # 库名
 MONGO_COLL = "Cheaa_Info_Items"  # 文档(相当于关系型数据库的表名)

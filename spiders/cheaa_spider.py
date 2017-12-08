@@ -33,6 +33,7 @@ class cheaaSpider(CrawlSpider):
     #         # yield scrapy.Request(url=next_link, callback=self.parse_ccontent)
 
         ##xpath不能取到下一页面的连接
+        time.sleep(360)
         next_links=response.url.replace('.shtml','')
         for i in range(2,3784):
             next_link = next_links + '_' + str(i) + '.shtml'
@@ -47,6 +48,7 @@ class cheaaSpider(CrawlSpider):
     def parse_ccontent(self,response):
         start_url=response.meta['start_url']
         for url in response.xpath('//*[@id="main-l1"]'):
+            time.sleep(5)
             item=CheaaItem()
             item['LinkUrl'] =response.url
             item['Title']=url.xpath('//div[@id="NewsTitle"]/h1/text()').extract()[0]
