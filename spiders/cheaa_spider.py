@@ -11,7 +11,7 @@ class cheaaSpider(CrawlSpider):
     allowed_domains = ["cheaa.com"]
     start_urls = [
         'http://news.cheaa.com/renwu.shtml',
-        # 'http://news.cheaa.com/hangye.shtml'
+        'http://news.cheaa.com/hangye.shtml'
 
     ]
 
