@@ -33,7 +33,7 @@ class cheaaSpider(CrawlSpider):
     #         # yield scrapy.Request(url=next_link, callback=self.parse_ccontent)
 
         ##xpath不能取到下一页面的连接
-        time.sleep(360)
+        time.sleep(60)
         next_links=response.url.replace('.shtml','')
         for i in range(2,3784):
             next_link = next_links + '_' + str(i) + '.shtml'

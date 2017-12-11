@@ -11,8 +11,7 @@ class cheaaSpider(CrawlSpider):
     name = "cheaa_news"
     allowed_domains = ["cheaa.com"]
     start_urls = [
-        'http://news.cheaa.com/2008/0221/117484.shtml'
-    ]
+        'http://news.cheaa.com/2008/0221/117484.shtml']
 
     def parse(self,response):
         for next_content_url in response.xpath('//*[@id="main-l1"]'):
