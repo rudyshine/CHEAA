@@ -28,15 +28,7 @@ class cheaaSpider(CrawlSpider):
             yield item
 
 
-            # try:
-            #     next_content_page=next_content_url.xpath('//div[@class="article-page"]/table/tr/td[7]/a/@href').extract()[0]
-            #     print('111111111111111')
-            #     print(next_content_page)
-            #     if next_content_page:
-            #         next_content_link=next_content_page
-            #         print("next_content_link:",next_content_link)
-            #         yield scrapy.Request(url=next_content_link, callback=self.parse)
-            # except IndexError:
+
 
             for i in range(2,6):
                 next_content_page=response.url.replace('.shtml','')
