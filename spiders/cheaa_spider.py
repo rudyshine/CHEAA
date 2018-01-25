@@ -19,7 +19,7 @@ class cheaaSpider(CrawlSpider):
         for sel in response.xpath('//div[@class="ListPageBox  list"]/ul/li/div[@class="hbox-r"]/h2'):
             start_url = response.url
             links=sel.xpath('a/@href').extract()[0]
-            if_belong =links.startswith('http://news.cheaa.com/')  ##
+            if_belong =links.startswith('http://news.cheaa.com/')
             if(if_belong):
                 link=links
                 print(link)
@@ -33,9 +33,9 @@ class cheaaSpider(CrawlSpider):
     #         # yield scrapy.Request(url=next_link, callback=self.parse_ccontent)
 
         ##xpath不能取到下一页面的连接
-        time.sleep(60)
+        time.sleep(6)
         next_links=response.url.replace('.shtml','')
-        for i in range(2,3784):
+        for i in range(2,10):
             next_link = next_links + '_' + str(i) + '.shtml'
             # print(next_link)
             r=requests.get(next_link)
@@ -67,6 +67,7 @@ class cheaaSpider(CrawlSpider):
             FontContent=url.xpath('//*[@id="ctrlfscont"]/p/font/text()').extract()
             Font2Content=url.xpath('//*[@id="ctrlfscont"]/font/p/text()').extract()
             item['ArtcleContent']=FontContent+Span2Content+SpanContent+TextContent+DivContent+EmContent+PContent+CenterContent+p2Content+Text2Content+Font2Content
+            print(item['ArtcleContent'])
             item['startUrl'] = start_url  ##meta方法获取传过来的值
             ProgramStarttime=time.strftime('%Y-%m-%d', time.localtime(time.time()))
             item['ProgramStarttime']=ProgramStarttime

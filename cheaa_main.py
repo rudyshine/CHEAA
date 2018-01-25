@@ -1,3 +1,4 @@
+# -*- coding:UTF-8 -*-
 from scrapy import cmdline
 # cmdline.execute("scrapy crawlall".split())  ##同时执行
 
